@@ -78,27 +78,24 @@ class Card {
   const dealButton = document.getElementById('deal-button');
   const hitButton = document.getElementById('hit-button');
   const standButton = document.getElementById('stand-button');
+  const resultMessageElement = document.getElementById('result-message');
 
   // Function to determine the winner and end the round
 function determineWinner() {
     const playerHandValue = blackjackGame.player.getHandValue();
     const dealerHandValue = blackjackGame.dealer.getHandValue();
+    
 
     if (playerHandValue > 21) {
-        // Player busts, dealer wins
-        console.log("Player busts. Dealer wins!");
+        resultMessageElement.textContent = "Player busts. Dealer wins!";
     } else if (dealerHandValue > 21) {
-        // Dealer busts, player wins
-        console.log("Dealer busts. Player wins!");
+        resultMessageElement.textContent = "Dealer busts. Player wins!"
     } else if (playerHandValue > dealerHandValue) {
-        // Player has a higher hand value, player wins
-        console.log("Player wins!");
+        resultMessageElement.textContent = "Player wins!";
     } else if (dealerHandValue > playerHandValue) {
-        // Dealer has a higher hand value, dealer wins
-        console.log("Dealer wins!");
+        resultMessageElement.textContent = "Dealer wins!";
     } else {
-        // It's a tie (push)
-        console.log("It's a tie!");
+        resultMessageElement.textContent = "It's a tie!";
     }
 
     // Enable the "Deal" button to start a new round
@@ -132,12 +129,17 @@ function dealInitialCards() {
     blackjackGame.player.hand = [];
     blackjackGame.dealer.hand = [];
 
+    resultMessageElement.textContent = ''
+
     // Shuffle the deck for a new round
     blackjackGame.deck = new Deck();
     blackjackGame.deck.shuffle();
 
     // Deal initial cards and update the display
     dealInitialCards();
+
+    hitButton.disabled = false;
+    standButton.disabled = false;
 }
 
   dealButton.addEventListener('click', startNewRound);
