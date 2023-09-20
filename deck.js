@@ -75,3 +75,10 @@ class Card {
     }
   }
   
+
+  const playerName = "Player 1";
+  const blackjackGame = new BlackjackGame(playerName);
+  blackjackGame.dealInitialCards();
+  
+  console.log(`Player's hand: ${playerName}`, blackjackGame.player.hand);
+  console.log(`Dealer's hand:`, blackjackGame.dealer.hand);
